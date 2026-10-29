@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="az"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elan.az — Avto, Əmlak və hər şey</title>
+<style>
+:root{--c:#e11d48;--c2:#f97316;--d:#111827;--g:#6b7280;--b:#e5e7eb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,sans-serif;background:#f3f4f6;color:var(--d)}
+input,select,textarea{font:inherit;padding:10px;border:1px solid var(--b);border-radius:10px;width:100%;background:#fff;transition:.2s}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--c);box-shadow:0 0 0 4px #e11d4822}
+button{font:inherit;font-weight:700;color:#fff;border:0;border-radius:10px;padding:10px 18px;cursor:pointer;background:linear-gradient(135deg,var(--c),var(--c2));transition:.2s;position:relative;overflow:hidden}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 20px #e11d4855}button:active{transform:scale(.95)}
+button::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,#fff6 50%,transparent 70%);transform:translateX(-120%)}
+button:hover::after{transform:translateX(120%);transition:.7s}
+header{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:#ffffffcc;backdrop-filter:blur(10px);transition:.3s}
+header.s{box-shadow:0 4px 20px #0002}
+.logo{font-size:28px;font-weight:900;color:var(--c);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}.logo span{color:var(--d)}
+.post{animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #e11d4866}70%{box-shadow:0 0 0 14px #e11d4800}100%{box-shadow:0 0 0 0 #e11d4800}}
+@keyframes pop{from{transform:scale(0) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes up{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-28px) rotate(8deg)}}
+@keyframes bg{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+@keyframes sh{to{background-position:-200% 0}}
+.hero{position:relative;overflow:hidden;text-align:center;color:#fff;padding:70px 16px 60px;background:linear-gradient(120deg,#be123c,#e11d48,#f97316,#9333ea);background-size:300% 300%;animation:bg 12s ease infinite}
+.hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,48px);animation:up .8s both}.hero p{margin:0 0 24px;opacity:.9;animation:up .8s .15s both}
+.em{position:absolute;font-size:48px;opacity:.35;animation:fl 6s ease-in-out infinite;pointer-events:none}
+.sb{position:relative;max-width:640px;margin:auto 
+;animation:up .8s .3s both}.sb input{padding:16px 20px;font-size:17px;border-radius:50px;border:0;box-shadow:0 10px 40px #0004;color:var(--d)}
+.sb button{position:absolute;right:6px;top:6px;border-radius:40px;padding:11px 24px}
+.tabs{position:relative;display:inline-flex;gap:4px;margin-top:22px;background:#0003;padding:5px;border-radius:40px;animation:up .8s .45s both;flex-wrap:wrap;justify-content:center}
+.tab{position:relative;z-index:1;padding:9px 18px;border-radius:30px;cursor:pointer;font-weight:700;transition:.3s}
+.tab:hover{transform:scale(1.07)}.tab.on{color:var(--c)}
+#ind{position:absolute;top:5px;bottom:5px;background:#fff;border-radius:30px;transition:.45s cubic-bezier(.5,1.4,.5,1);z-index:0}
+.wrap{max-width:1200px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:250px 1fr;gap:18px}
+aside{background:#fff;border-radius:16px;padding:16px;height:fit-content;position:sticky;top:76px;animation:up .6s both}
+aside label{display:block;font-size:13px;color:var(--g);margin:10px 0 3px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.card{position:relative;background:#fff;border-radius:16px;overflow:hidden;cursor:pointer;transition:.3s;animation:up .6s both}
+.card:hover{transform:translateY(-8px) rotate(-.5deg);box-shadow:0 18px 40px #0003}
+.img{height:170px;background:#e5e7eb center/cover;display:flex;align-items:center;justify-content:center;font-size:44px;transition:.5s}
+.card:hover .img{transform:scale(1.12)}.iw{overflow:hidden}
+.ci{padding:12px}.pr{font-weight:900;font-size:19px;color:var(--c)}.mt{color:var(--g);font-size:13px;margin-top:3px}
+.tag{display:inline-block;background:#fee2e2;color:var(--c);font-size:11px;padding:2px 9px;border-radius:10px;margin-left:6px;font-weight:700}
+.hr{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;background:#fffd;color:#999;padding:0;font-size:18px;z-index:2}
+.hr.on{color:var(--c);animation:pop .4s}
+.sk{height:260px;border-radius:16px;background:linear-gradient(90deg,#e5e7eb 25%,#f3f4f6 50%,#e5e7eb 75%);background-size:200% 100%;animation:sh 1.2s infinite}
+.modal{position:fixed;inset:0;background:#000a;z-index:50;overflow:auto;padding:20px;opacity:0;pointer-events:none;transition:.3s;backdrop-filter:blur(4px)}
+.modal.on{opacity:1;pointer-events:auto}
+.box{background:#fff;max-width:760px;margin:auto;border-radius:20px;padding:22px;position:relative;transform:translateY(60px) scale(.9);transition:.4s cubic-bezier(.3,1.4,.5,1)}
+.modal.on .box{transform:none}
+.x{position:absolute;right:14px;top:12px;background:none;color:var(--g);font-size:28px;padding:0 8px;box-shadow:none!important}.x:hover{transform:rotate(90deg)}
+.main{height:340px;background:#e5e7eb center/contain no-repeat;border-radius:12px;transition:.3s}
+.th{display:flex;gap:6px;margin:8px 0}.th div{width:68px;height:50px;background:center/cover;border-radius:8px;cursor:pointer;transition:.2s}.th div:hover{transform:scale(1.15)}
+table{width:100%;border-collapse:collapse}td{padding:7px;border-bottom:1px solid var(--b)}td:first-child{color:var(--g);width:40%}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+#toast{position:fixed;left:50%;bottom:-80px;transform:translateX(-50%);background:var(--d);color:#fff;padding:14px 26px;border-radius:40px;z-index:99;transition:.5s cubic-bezier(.3,1.5,.5,1)}
+#toast.on{bottom:30px}
+@media(max-width:800px){.wrap{grid-template-columns:1fr}aside{position:static}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.45;animation:bl 14s ease-in-out infinite;pointer-events:none}
+@keyframes bl{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(80px,-40px) scale(1.3)}66%{transform:translate(-60px,50px) scale(.8)}}
+.logo,.logo span{color:transparent}
+.logo{background:linear-gradient(90deg,#e11d48,#f97316,#9333ea,#e11d48);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;animation:pop .8s cubic-bezier(.3,1.6,.5,1),bg 6s linear infinite}
+@keyframes wig{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg) scale(1.1)}75%{transform:rotate(8deg) scale(1.1)}}
+.logo:hover,.tab:hover{animation:wig .5s}
+.mq{overflow:hidden;background:#111827;color:#fff;padding:11px 0;white-space:nowrap}
+.mq div{display:inline-block;animation:mq 28s linear infinite}.mq span{margin:0 26px;font-weight:700}
+@keyframes mq{to{transform:translateX(-50%)}}
+.card{animation:up .6s backwards}
+.card:hover{transform:perspective(700px) translateY(-10px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(1.02);box-shadow:0 20px 44px #0003,0 0 0 2px #e11d4877}
+#glow{position:fixed;left:0;top:0;width:320px;height:320px;margin:-160px 0 0 -160px;border-radius:50%;background:radial-gradient(#e11d4830,transparent 70%);pointer-events:none;z-index:1;transition:transform .12s}
+.cf{position:fixed;top:-20px;width:10px;height:14px;z-index:99;animation:cf 2.4s ease-in forwards;pointer-events:none}
+@keyframes cf{to{transform:translate(var(--x),105vh) rotate(var(--r));opacity:.7}}
+.rp{position:absolute;border-radius:50%;background:#fff6;transform:scale(0);animation:rp .6s linear;pointer-events:none}
+@keyframes rp{to{transform:scale(4);opacity:0}}
+.box>*{animation:up .5s backwards}.box>:nth-child(3){animation-delay:.08s}.box>:nth-child(4){animation-delay:.16s}.box>:nth-child(5){animation-delay:.24s}.box>:nth-child(n+6){animation-delay:.32s}
+aside>*{animation:up .5s backwards}aside>:nth-child(2){animation-delay:.05s}aside>:nth-child(3){animation-delay:.1s}aside>:nth-child(4){animation-delay:.15s}aside>:nth-child(n+5){animation-delay:.2s}
+#cnt b{display:inline-block;animation:pop .5s;color:var(--c);font-size:20px}
+.em{animation-duration:5s}.hero h1{background:linear-gradient(90deg,#fff,#fde68a,#fff);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:up .8s both,bg 5s linear infinite}
+#au a{color:var(--d);font-weight:700;text-decoration:none;margin:0 6px}#au{margin-left:auto;margin-right:14px}</style></head><body>
+<header id="hd"><div class="logo">Elan<span>.az</span></div><span id="au"></span><button class="post" onclick="openForm()">+ Elan yerləşdir</button></header>
+<section class="hero">
+<i class="blob" style="left:-80px;top:-60px;width:320px;height:320px;background:#fde047"></i><i class="blob" style="right:-60px;bottom:-80px;width:360px;height:360px;background:#7c3aed;animation-delay:-5s"></i><span class="em" style="left:6%;top:20%">🚗</span><span class="em" style="left:30%;top:78%;animation-delay:-2.5s">💻</span><span class="em" style="left:92%;top:44%;animation-delay:-3.5s">🏢</span><span class="em" style="left:2%;top:46%;animation-delay:-1.5s">👟</span><span class="em" style="left:84%;top:15%;animation-delay:-2s">🏠</span>
+<span class="em" style="left:16%;top:68%;animation-delay:-4s">📱</span><span class="em" style="left:76%;top:64%;animation-delay:-1s">🛋️</span>
+<span class="em" style="left:46%;top:6%;animation-delay:-3s;font-size:34px">⭐</span>
+<h1>İstədiyiniz hər şey burada</h1><p>Avtomobil, əmlak və minlərlə digər elan — bir yerdə</p>
+<div class="sb"><input id="q" placeholder="Nə axtarırsınız? BMW, 3 otaqlı mənzil, iPhone..." onkeydown="if(event.key=='Enter')load()"><button onclick="load()">Axtar</button></div>
+<div class="tabs" id="tabs"></div></section>
+<div class="mq"><div><span>🚗 Avtomobil</span><span>🏠 Əmlak</span><span>📱 Elektronika</span><span>👕 Geyim</span><span>🛋️ Ev əşyaları</span><span>🛠️ Xidmətlər</span><span>🐶 Heyvanlar</span><span>⚡ Elan yerləşdirmək pulsuzdur</span><span>🚗 Avtomobil</span><span>🏠 Əmlak</span><span>📱 Elektronika</span><span>👕 Geyim</span><span>🛋️ Ev əşyaları</span><span>🛠️ Xidmətlər</span><span>🐶 Heyvanlar</span><span>⚡ Elan yerləşdirmək pulsuzdur</span></div></div><div class="wrap"><aside id="flt"></aside><div><div class="mt" id="cnt" style="margin-bottom:10px;font-size:15px"></div><div class="grid" id="list"></div></div></div>
+<div class="modal" id="m" onclick="if(event.target==this)closeM()"><div class="box" id="mb"></div></div><div id="glow"></div><div id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CITIES=['Bakı','Gəncə','Sumqayıt','Abşeron','Ağcabədi','Ağdam','Ağdaş','Ağstafa','Ağsu','Astara','Babək','Balakən','Beyləqan','Bərdə','Biləsuvar','Cəbrayıl','Cəlilabad','Culfa','Daşkəsən','Füzuli','Gədəbəy','Goranboy','Göyçay','Göygöl','Hacıqabul','Xaçmaz','Xankəndi','Xırdalan','Xızı','Xocalı','Xocavənd','İmişli','İsmayıllı','Kəlbəcər','Kəngərli','Kürdəmir','Qax','Qazax','Qobustan','Quba','Qubadlı','Qusar','Laçın','Lerik','Lənkəran','Masallı','Mingəçevir','Naftalan','Naxçıvan','Neftçala','Oğuz','Ordubad','Saatlı','Sabirabad','Salyan','Samux','Siyəzən','Şabran','Şahbuz','Şamaxı','Şəki','Şəmkir','Şərur','Şirvan','Şuşa','Tərtər','Tovuz','Ucar','Yardımlı','Yevlax','Zaqatala','Zəngilan','Zərdab'];
+const CARS={};`Acura|ILX,MDX,RDX,TLX,Integra,TSX
+Alfa Romeo|Giulia,Stelvio,Giulietta,159,147,156,MiTo
+Aston Martin|DB11,DBX,Vantage,DBS,Rapide
+Audi|A1,A3,A4,A5,A6,A7,A8,Q2,Q3,Q5,Q7,Q8,TT,e-tron,RS6,S3,S4,100,80,Allroad
+Bentley|Continental GT,Bentayga,Flying Spur,Mulsanne
+BMW|1 Series,2 Series,3 Series,4 Series,5 Series,6 Series,7 Series,8 Series,X1,X2,X3,X4,X5,X6,X7,Z4,i3,i4,iX,M3,M5,E34,E39,E46,E60,F10,G30
+Brilliance|H230,H530,V5
+Bugatti|Veyron,Chiron
+Buick|Enclave,Encore,Regal,LaCrosse,Envision
+BYD|Han,Tang,Song,Qin,Yuan,Seal,Dolphin,F3,Atto 3
+Cadillac|Escalade,CTS,ATS,XT5,XT6,SRX,CT5,STS
+Changan|CS35,CS55,CS75,Eado,UNI-T,Alsvin
+Chery|Tiggo 4,Tiggo 7,Tiggo 8,Arrizo 5,QQ,Amulet,Fora
+Chevrolet|Aveo,Cruze,Lacetti,Malibu,Captiva,Cobalt,Spark,Tahoe,Camaro,Equinox,Trax,Niva,Orlando,Nexia,Epica,Silverado,Suburban,Corvette,Impala,Traverse
+Chrysler|300C,Pacifica,Voyager,Sebring,PT Cruiser,Town & Country
+Citroën|C3,C4,C5,C-Elysée,Berlingo,Jumpy,DS3,Xsara,Picasso,C1,C2
+Dacia|Logan,Sandero,Duster,Lodgy,Dokker
+Daewoo|Nexia,Matiz,Lanos,Gentra,Espero,Damas,Leganza
+Daihatsu|Terios,Sirion,Charade,Cuore
+Datsun|on-Do,mi-Do,GO
+Dodge|Charger,Challenger,Durango,Journey,Caliber,Ram,Nitro,Viper
+Dongfeng|AX7,H30 Cross,580
+DS|DS 3,DS 4,DS 7
+FAW|Besturn B50,Vita,V5
+Ferrari|488,F8,Roma,812,296,Portofino,California,458
+Fiat|500,Doblo,Linea,Tipo,Panda,Punto,Albea,Ducato,Bravo
+Ford|Focus,Fiesta,Fusion,Mondeo,Mustang,Explorer,Escape,Edge,Transit,Ranger,F-150,Kuga,EcoSport,Expedition,Taurus,Bronco,Galaxy,S-Max,C-Max,Ka
+GAZ|Volga,Gazelle,Sobol,Next,24,31105
+Geely|Emgrand,Coolray,Atlas,Tugella,MK,CK,Monjaro
+Genesis|G70,G80,G90,GV70,GV80
+GMC|Sierra,Yukon,Acadia,Terrain,Canyon
+Great Wall|Hover H3,Hover H5,Wingle
+Haval|H2,H6,H9,Jolion,F7
+Honda|Civic,Accord,CR-V,Fit,HR-V,Pilot,Odyssey,City,Jazz,Insight,Legend,Stream,Element,Prelude,S2000
+Hongqi|H5,H9,HS5
+Hummer|H2,H3,EV
+Hyundai|Accent,Elantra,Sonata,Tucson,Santa Fe,Creta,i10,i20,i30,i40,Solaris,Getz,Palisade,Kona,Veloster,Genesis,Equus,Azera,Grandeur,H1,Porter,Ioniq,Venue,Matrix,Coupe
+Infiniti|Q50,Q60,Q70,QX50,QX56,QX60,QX70,QX80,FX35,FX37,G35,M35,EX35
+Isuzu|D-Max,NPR,Trooper,MU-X
+Iveco|Daily,Eurocargo,Stralis
+JAC|J7,S3,S5,T6,Refine
+Jaguar|XE,XF,XJ,F-Pace,E-Pace,F-Type,S-Type,X-Type
+Jeep|Wrangler,Grand Cherokee,Cherokee,Compass,Renegade,Patriot,Liberty,Gladiator,Commander
+Kia|Rio,Cerato,Optima,K5,Sportage,Sorento,Picanto,Soul,Stinger,Carnival,Seltos,Sonet,Stonic,Mohave,Carens,K7,K9,Ceed,Telluride,Forte,Morning,Sephia,Magentis
+Lada (VAZ)|2101,2104,2105,2106,2107,2108,2109,21099,2110,2112,2114,2115,Niva,Niva Travel,Granta,Vesta,Priora,Kalina,XRAY,Largus,4x4
+Lamborghini|Huracán,Urus,Aventador,Gallardo,Revuelto
+Lancia|Ypsilon,Delta,Thesis
+Land Rover|Range Rover,Range Rover Sport,Range Rover Evoque,Range Rover Velar,Discovery,Discovery Sport,Defender,Freelander
+Lexus|ES,GS,IS,LS,NX,RX,GX,LX,UX,LC,RC,CT
+Li Auto|L7,L8,L9
+Lifan|X60,Solano,Breez,X50
+Lincoln|Navigator,Aviator,Continental,MKZ,MKX,Town Car
+Lotus|Elise,Evora,Emira,Exige
+Lynk & Co|01,03,05
+Mahindra|XUV500,Scorpio,Thar
+Maserati|Ghibli,Levante,Quattroporte,GranTurismo,MC20
+Maybach|S 580,S 650,GLS 600
+Mazda|2,3,5,6,CX-3,CX-5,CX-7,CX-9,CX-30,MX-5,RX-8,323,626,Demio,Premacy,Tribute
+McLaren|720S,570S,GT,Artura,P1
+Mercedes-Benz|A-Class,B-Class,C-Class,E-Class,S-Class,CLA,CLS,GLA,GLB,GLC,GLE,GLS,G-Class,ML,GL,SLK,SL,Vito,Sprinter,V-Class,AMG GT,190,124,140,210,211,220,W203,W204,W205,W212,W213
+Mercury|Grand Marquis,Mariner,Sable
+MG|3,5,6,ZS,HS,RX5,Marvel R
+Mini|Cooper,Countryman,Clubman,Cabrio,Paceman
+Mitsubishi|Lancer,Outlander,ASX,Pajero,Pajero Sport,L200,Galant,Eclipse Cross,Colt,Carisma,Space Star,Grandis,Mirage,Montero
+Moskvich|2140,412,Aleko,3
+NIO|ES6,ES8,ET5,ET7
+Nissan|Almera,Altima,Maxima,Micra,Note,Juke,Qashqai,X-Trail,Murano,Pathfinder,Patrol,Teana,Sunny,Tiida,Leaf,Navara,Rogue,Sentra,Versa,Kicks,370Z,GT-R,Primera,Skyline,Armada,Titan
+Opel|Astra,Corsa,Vectra,Insignia,Zafira,Mokka,Omega,Meriva,Antara,Kadett,Combo,Vivaro,Crossland,Grandland,Tigra
+Peugeot|107,108,206,207,208,301,307,308,406,407,408,508,2008,3008,5008,Partner,Expert,Boxer,Rifter
+Pontiac|Firebird,G6,Grand Prix,Vibe,Solstice
+Porsche|911,718,Cayenne,Macan,Panamera,Taycan,Boxster,Cayman
+Proton|Persona,Saga,Wira,Exora
+Ram|1500,2500,ProMaster
+Renault|Logan,Sandero,Duster,Megane,Clio,Fluence,Captur,Kadjar,Koleos,Laguna,Symbol,Scenic,Trafic,Master,Kangoo,Talisman,Arkana,Twingo,Safrane
+Rolls-Royce|Ghost,Wraith,Phantom,Cullinan,Dawn,Spectre
+Rover|75,45,25,200
+Saab|9-3,9-5,900
+Scion|tC,xB,xD
+Seat|Ibiza,Leon,Toledo,Ateca,Arona,Alhambra,Cordoba
+Skoda|Octavia,Fabia,Superb,Rapid,Kodiaq,Karoq,Kamiq,Yeti,Felicia,Scala
+Smart|Fortwo,Forfour,Roadster
+SsangYong|Korando,Rexton,Tivoli,Actyon,Kyron,Musso,Istana
+Subaru|Impreza,Legacy,Forester,Outback,XV,Crosstrek,WRX,BRZ,Tribeca,Levorg
+Suzuki|Swift,Vitara,Grand Vitara,SX4,Jimny,Baleno,Ignis,Alto,Celerio,Liana,Splash,Wagon R
+Tata|Nexon,Harrier,Safari,Indica
+Tesla|Model S,Model 3,Model X,Model Y,Cybertruck,Roadster
+Toyota|Camry,Corolla,RAV4,Land Cruiser,Land Cruiser Prado,Hilux,Yaris,Avensis,Auris,Prius,Highlander,Fortuner,C-HR,Crown,Venza,Sienna,Tacoma,Tundra,Sequoia,Avalon,Previa,Alphard,Verso,Vitz,Mark II,Corona,Supra,4Runner,Hiace,Aygo
+UAZ|Patriot,Hunter,Pickup,452
+Volkswagen|Golf,Passat,Polo,Jetta,Tiguan,Touareg,Touran,Arteon,Beetle,Bora,Caddy,Transporter,Multivan,Sharan,Scirocco,T-Roc,T-Cross,ID.4,ID.3,Amarok,Lupo,Phaeton,Atlas,Taos,Santana,Crafter
+Volvo|S40,S60,S80,S90,V40,V60,V70,V90,XC40,XC60,XC70,XC90,C30,C70
+Xpeng|P7,G9,G6
+ZAZ|Sens,Lanos,Vida,Tavria
+Zeekr|001,007,X
+Zotye|T600,Z300,Z100`.split('\n').forEach(l=>{const[a,b]=l.split('|');CARS[a]=b.split(',')});CARS['Digər']=[];const BRANDS=Object.keys(CARS);
+const BODY=['Sedan','Hetçbek','Universal','Krossover / SUV','Offroad (Ceep)','Kupe','Kabriolet','Liftbek','Minivan','Pikap','Furqon','Mikroavtobus','Rodster'];
+const COLORS=['Ağ','Qara','Gümüşü','Boz','Qırmızı','Mavi','Göy','Yaşıl','Sarı','Narıncı','Qəhvəyi','Bej','Bənövşəyi','Qızılı','Çəhrayı','Digər'];
+const MARKETS=['Azərbaycan (rəsmi diler)','Avropa','Amerika','Koreya','Yaponiya','Rusiya','Gürcüstan','Dubay / Körfəz','Çin','Digər'];
+const EXTRAS=['Yüngül lehimli disklər','ABS','Sürüşməyə qarşı sistem (ESP)','Mərkəzi qapanma','Dəri salon','Kondisioner','Klimat-kontrol','Park radarı','Arxa görüntü kamerası','Lyuk','Panoramik dam','Ksenon lampalar','LED fənərlər','Isidilən oturacaqlar','Elektrik güzgülər','Elektrik pəncərələr','Yağış sensoru','Kruiz-kontrol','Naviqasiya','Multimedia ekranı','Start/Stop düyməsi','Hava yastıqları'];
+const SEC={tap:{n:'🛍️ Hər şey',cats:['Elektronika','Geyim','Ev əşyaları','Xidmətlər','Heyvanlar','Digər'],f:[]},
+avto:{n:'🚗 Avtomobil',f:[['brand','Marka','sel',BRANDS],['model','Model','txt'],['body','Ban növü','sel',BODY],['year','Buraxılış ili','num'],['mileage','Yürüş (km)','num'],['engine','Mühərikin həcmi (sm³)','num'],['fuel','Yanacaq','sel',['Benzin','Dizel','Qaz','Hibrid','Plug-in hibrid','Elektrik']],['gearbox','Sürətlər qutusu','sel',['Mexanika','Avtomat','Robot','Variator']],['drive','Ötürücü','sel',['Ön','Arxa','Tam']],['color','Rəng','sel',COLORS],['market','Hansı bazar üçün yığılıb','sel',MARKETS],['damage','Vəziyyəti','sel',['Vuruğu yoxdur','Rənglənməyib','Rənglənib','Vuruğu var','Qəzalı']],['credit','Kreditlə satılır','chk'],['barter','Barter mümkündür','chk']],ext:EXTRAS},
+emlak:{n:'🏠 Əmlak',deal:['Satış','İcarə'],f:[['propType','Növ','sel',['Mənzil','Həyət evi','Torpaq','Ofis','Qaraj']],['rooms','Otaq sayı','num'],['area','Sahə (m²)','num'],['floor','Mərtəbə','txt']]}};
+const LBL={body:'Ban növü',engine:'Mühərik (sm³)',market:'Bazar',drive:'Ötürücü',damage:'Vəziyyəti',credit:'Kredit',barter:'Barter',extras:'Əlavə avadanlıq',brand:'Marka',model:'Model',year:'İl',mileage:'Yürüş (km)',fuel:'Yanacaq',gearbox:'Sürətlər qutusu',color:'Rəng',propType:'Növ',rooms:'Otaq',area:'Sahə (m²)',floor:'Mərtəbə'};
+let sec='',fav=[];try{fav=JSON.parse(localStorage.getItem('fav')||'[]')}catch{}
+addEventListener('scroll',()=>$('hd').classList.toggle('s',scrollY>10));
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2500)}
+function tabs(){$('tabs').innerHTML='<i id="ind"></i>'+[['','✨ Hamısı'],...Object.entries(SEC).map(([k,v])=>[k,v.n])].map(([k,n])=>`<div class="tab ${sec==k?'on':''}" onclick="sec='${k}';tabs();filters();load()">${n}</div>`).join('');
+ requestAnimationFrame(()=>{const o=document.querySelector('.tab.on'),i=$('ind');i.style.left=o.offsetLeft+'px';i.style.width=o.offsetWidth+'px'})}
+function sel(n,l,o,ph='Hamısı'){return`<label>${l}</label><select id="f_${n}"><option value="">${ph}</option>${o.map(x=>`<option>${x}</option>`).join('')}</select>`}
+function filters(){const s=SEC[sec];let h=sel('city','📍 Şəhər',CITIES);
+ if(s?.deal)h+=sel('deal','Əməliyyat',s.deal);if(s?.cats)h+=sel('category','Kateqoriya',s.cats);
+ (s?.f||[]).forEach(([n,l,t,o])=>{if(t=='sel')h+=sel(n,l,o);if(n=='rooms')h+=`<label>Otaq sayı</label><input id="f_rooms" type="number">`;if(['year','mileage','engine'].includes(n))h+=`<label>${l}</label><div class="r2"><input id="f_${n}Min" type="number" placeholder="min"><input id="f_${n}Max" type="number" placeholder="maks"></div>`;if(t=='chk')h+=`<label style="display:flex;gap:6px;align-items:center;color:var(--d)"><input type="checkbox" id="f_${n}" value="Bəli" style="width:auto"> ${l}</label>`});
+ if(s?.ext)h+='<label>Əlavə avadanlıq</label>'+s.ext.map((x,i)=>`<label style="display:flex;gap:6px;align-items:center;color:var(--d);margin:3px 0"><input type="checkbox" id="f_ex_${i}" value="${x}" style="width:auto"> ${x}</label>`).join('');h+=`<label>💰 Qiymət (₼)</label><div class="r2"><input id="f_min" type="number" placeholder="min"><input id="f_max" type="number" placeholder="max"></div>`+sel('sort','Sıralama',[],'Ən yenilər').replace('</select>','<option value="cheap">Ucuzdan bahaya</option><option value="exp">Bahadan ucuza</option></select>')+`<br><button style="width:100%;margin-top:12px" onclick="load()">Filtrlə</button>`;
+ $('flt').innerHTML=h;$('flt').style.animation='none';$('flt').offsetWidth;$('flt').style.animation='';fm()}
+function count(n){const t=Date.now();(function f(){const k=Math.min((Date.now()-t)/600,1);$('cnt').innerHTML=`<b>${Math.round(n*k)}</b> elan tapıldı`;if(k<1)requestAnimationFrame(f)})()}
+function heart(id,e){e.stopPropagation();fav=fav.includes(id)?fav.filter(x=>x!=id):[...fav,id];try{localStorage.setItem('fav',JSON.stringify(fav))}catch{}
+ e.currentTarget.classList.toggle('on');toast(fav.includes(id)?'❤️ Sevimlilərə əlavə olundu':'Sevimlilərdən silindi')}
+async function load(){const p=new URLSearchParams({q:$('q').value,section:sec});
+ document.querySelectorAll('[id^=f_]').forEach(e=>{if(e.type=='checkbox'){if(!e.checked)return;if(e.id.startsWith('f_ex_'))return p.append('extras',e.value)}e.value&&p.set(e.id.slice(2),e.value)});
+ $('list').innerHTML='<div class="sk"></div>'.repeat(8);
+ const a=await(await fetch('/api/ads?'+p)).json();count(a.length);
+ $('list').innerHTML=a.map((x,i)=>`<div class="card" style="animation-delay:${i*60}ms" onclick="show(${x.id})"><button class="hr ${fav.includes(x.id)?'on':''}" onclick="heart(${x.id},event)">♥</button><div class="iw"><div class="img" style="${x.images[0]?`background-image:url(/uploads/${x.images[0]})`:''}">${x.images[0]?'':'📷'}</div></div><div class="ci"><div class="pr">${x.price!=null?esc(x.price)+' ₼':'Razılaşma'}<span class="tag">${esc(x.deal||SEC[x.section].n.split(' ')[1])}</span></div><div>${esc(x.title)}</div><div class="mt">${esc(x.city)} • ${esc(x.created_at.slice(0,10))}</div>${x.section=='avto'?`<div class="mt">${[x.attrs.year,x.attrs.engine?(x.attrs.engine/1000).toFixed(1)+' L':'',x.attrs.mileage?x.attrs.mileage+' km':'',x.attrs.gearbox].filter(Boolean).map(esc).join(' • ')}</div>`:''}</div></div>`).join('')||'<p style="font-size:40px;text-align:center;grid-column:1/-1">🔍<br><small>Elan tapılmadı</small></p>'}
+async function show(id){const x=await(await fetch('/api/ads/'+id)).json();
+ $('mb').innerHTML=`<button class="x" onclick="closeM()">×</button><h2>${esc(x.title)}</h2><div class="pr" style="font-size:26px">${x.price!=null?esc(x.price)+' ₼':'Razılaşma yolu ilə'}</div>
+ ${x.images.length?`<div class="main" id="big" style="background-image:url(/uploads/${x.images[0]})"></div><div class="th">${x.images.map(i=>`<div style="background-image:url(/uploads/${i})" onclick="big.style.backgroundImage='url(/uploads/${i})'"></div>`).join('')}</div>`:''}
+ <table>${Object.entries(x.attrs).filter(([k,v])=>v&&k!='lat'&&k!='lng').map(([k,v])=>`<tr><td>${esc(LBL[k]||k)}</td><td>${esc(Array.isArray(v)?v.join(', '):v)}</td></tr>`).join('')}<tr><td>Şəhər</td><td>${esc(x.city)}</td></tr><tr><td>👁 Baxış</td><td>${x.views}</td></tr></table>
+ ${mapView(x.attrs)}<p style="white-space:pre-wrap">${esc(x.description)}</p><p><b>${esc(x.name)}</b> <button id="pb" onclick="showPhone(${x.id})">📞 Nömrəni göstər</button> <button style="background:#6b7280" onclick="report(${x.id})">🚩 Şikayət</button></p>`;$('m').classList.add('on')}
+function closeM(){$('m').classList.remove('on')}
+function openForm0(){$('mb').innerHTML=`<button class="x" onclick="closeM()">×</button><h2>🚀 Yeni elan</h2><form id="pf">
+ <div class="r2"><select name="section" id="ps" onchange="pf2()" required>${Object.entries(SEC).map(([k,v])=>`<option value="${k}">${v.n}</option>`).join('')}</select><select name="city">${CITIES.map(c=>`<option>${c}</option>`).join('')}</select></div>
+ <div id="dyn"></div><input name="title" placeholder="Başlıq *" required maxlength="120" style="margin-bottom:8px">
+ <textarea name="description" rows="4" placeholder="Təsvir *" required style="margin-bottom:8px"></textarea>
+ <div class="r2"><input name="price" type="number" min="0" placeholder="Qiymət (₼)"><input name="name" placeholder="Adınız"></div>
+ <div class="r2"><input name="phone" placeholder="Telefon * (050 123 45 67)" required><input name="images" type="file" accept="image/*" multiple></div>
+ <button style="width:100%">Elanı paylaş</button></form>`;pf2();$('m').classList.add('on');
+ $('pf').onsubmit=async e=>{e.preventDefault();const fd=new FormData(e.target),at={};
+  document.querySelectorAll('[data-a]').forEach(i=>{if(i.type=='checkbox'){if(i.checked){if(i.dataset.a=='extras')(at.extras=at.extras||[]).push(i.value);else at[i.dataset.a]='Bəli'}}else at[i.dataset.a]=i.value});fd.append('attrs',JSON.stringify(at));
+  const r=await fetch('/api/ads',{method:'POST',body:fd});if(r.ok){closeM();toast('🎉 Elan uğurla paylaşıldı!');confetti();load()}else alert((await r.json()).error)}}
+function pf2(){const s=SEC[$('ps').value];let h='';
+ if(s.cats)h+=`<select name="category" style="margin-bottom:8px">${s.cats.map(c=>`<option>${c}</option>`).join('')}</select>`;
+ if(s.deal)h+=`<select name="deal" style="margin-bottom:8px">${s.deal.map(c=>`<option>${c}</option>`).join('')}</select>`;
+ h+='<div class="r2">'+s.f.map(([n,l,t,o])=>t=='chk'?`<label style="display:flex;gap:6px;align-items:center;font-size:14px"><input type="checkbox" data-a="${n}" style="width:auto"> ${l}</label>`:t=='sel'?`<select data-a="${n}"><option value="">${l}</option>${o.map(x=>`<option>${x}</option>`).join('')}</select>`:`<input data-a="${n}" type="${t=='num'?'number':'text'}" placeholder="${l}">`).join('')+'</div>';
+ if(s.ext)h+='<b style="display:block;margin:10px 0 4px">⚙️ Əlavə avadanlıqlar</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">'+s.ext.map(x=>`<label style="font-size:13px"><input type="checkbox" data-a="extras" value="${x}" style="width:auto"> ${x}</label>`).join('')+'</div>';$('dyn').innerHTML=h;if($('ps').value=='emlak')mapPick();if($('ps').value=='avto')modelDyn()}
+tabs();filters();load();
+
+(()=>{const P=['BMW 520 2018','3 otaqlı mənzil Bakıda','iPhone 15 Pro','Həyət evi Quba','Velosiped'];let i=0,j=0,d=1;setInterval(()=>{const t=P[i];j+=d;$('q').placeholder='🔍 '+t.slice(0,j)+'|';if(j>=t.length+8)d=-1;if(j<=0){d=1;i=(i+1)%P.length}},90)})();
+addEventListener('mousemove',e=>{$('glow').style.transform=`translate(${e.clientX}px,${e.clientY}px)`;const w=innerWidth/2,h=innerHeight/2;document.querySelectorAll('.em').forEach((m,k)=>{const f=(k%3+1)*10;m.style.translate=`${(e.clientX-w)/w*f}px ${(e.clientY-h)/h*f}px`})});
+$('list').addEventListener('mousemove',e=>{const c=e.target.closest('.card');if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty('--ry',((e.clientX-r.left)/r.width-.5)*14+'deg');c.style.setProperty('--rx',-((e.clientY-r.top)/r.height-.5)*14+'deg')});
+$('list').addEventListener('mouseout',e=>{const c=e.target.closest('.card');if(c){c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')}});
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const r=b.getBoundingClientRect(),s=document.createElement('span'),d=Math.max(r.width,r.height);s.className='rp';s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;b.appendChild(s);setTimeout(()=>s.remove(),600)});
+function confetti(){for(let i=0;i<70;i++){const s=document.createElement('i');s.className='cf';s.style.cssText=`left:${Math.random()*100}vw;background:hsl(${Math.random()*360},90%,60%);--x:${Math.random()*200-100}px;--r:${Math.random()*900}deg;animation-delay:${Math.random()*.4}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),3200)}}
+
+let ME=null;
+async function api(u,m='GET',b){const r=await fetch(u,{method:m,headers:b?{'Content-Type':'application/json'}:{},body:b?JSON.stringify(b):undefined});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Xəta');return j}
+async function loadMe(){try{ME=(await api('/api/me')).user}catch{ME=null}
+ $('au').innerHTML=ME?`👤 ${esc(ME.name)} <a href="#" onclick="myAds();return false">Elanlarım</a>${ME.is_admin?'<a href="/admin.html">Admin</a>':''}<a href="#" onclick="logout();return false">Çıxış</a>`:`<a href="#" onclick="openAuth('login');return false">Daxil ol</a><a href="#" onclick="openAuth('register');return false">Qeydiyyat</a>`}
+function openForm(){ME?openForm0():openAuth('login','Elan yerləşdirmək üçün daxil olun')}
+function openAuth(mode,msg=''){const r=mode=='register';$('mb').innerHTML=`<button class="x" onclick="closeM()">×</button><h2>${r?'📝 Qeydiyyat':'🔑 Daxil ol'}</h2>${msg?`<p style="color:#e11d48">${msg}</p>`:''}
+ <form id="af">${r?'<input name="name" placeholder="Adınız" required style="margin-bottom:8px"><input name="phone" placeholder="Telefon" required style="margin-bottom:8px">':''}
+ <input name="email" type="email" placeholder="E-poçt" required style="margin-bottom:8px"><input name="password" type="password" placeholder="Parol${r?' (min 8 simvol)':''}" required minlength="${r?8:1}" style="margin-bottom:10px">
+ <button style="width:100%">${r?'Qeydiyyatdan keç':'Daxil ol'}</button></form><p class="mt" style="text-align:center">${r?'Hesabınız var?':'Hesabınız yoxdur?'} <a href="#" onclick="openAuth('${r?'login':'register'}');return false">${r?'Daxil ol':'Qeydiyyat'}</a></p>`;
+ $('m').classList.add('on');$('af').onsubmit=async e=>{e.preventDefault();try{await api('/api/'+mode,'POST',Object.fromEntries(new FormData(e.target)));await loadMe();closeM();toast('✅ Xoş gəlmisiniz!')}catch(x){toast('❌ '+x.message)}}}
+async function logout(){await api('/api/logout','POST',{});ME=null;loadMe();toast('Çıxış edildi')}
+async function myAds(){const a=await api('/api/my/ads');$('mb').innerHTML=`<button class="x" onclick="closeM()">×</button><h2>📋 Mənim elanlarım</h2>`+(a.map(x=>`<div style="display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--b);padding:8px 0"><div style="flex:1"><b>${esc(x.title)}</b><div class="mt">${esc(x.price??'')} ₼ • 👁 ${x.views}${x.status!='active'?' • <span style="color:var(--c)">gizlədilib</span>':''}</div></div><button onclick="editAd(${x.id},${JSON.stringify(esc(x.title))},${x.price??"''"})">✏️</button><button style="background:#6b7280" onclick="delAd(${x.id})">🗑️</button></div>`).join('')||'<p>Hələ elanınız yoxdur.</p>');$('m').classList.add('on')}
+async function delAd(id){if(!confirm('Elan silinsin?'))return;try{await api('/api/ads/'+id,'DELETE');toast('Silindi');myAds();load()}catch(e){toast(e.message)}}
+async function editAd(id,t,p){const title=prompt('Başlıq',t);if(title===null)return;const price=prompt('Qiymət (₼)',p);if(price===null)return;try{await api('/api/ads/'+id,'PATCH',{title,price});toast('✏️ Yeniləndi');myAds();load()}catch(e){toast(e.message)}}
+async function showPhone(id){try{const r=await api(`/api/ads/${id}/phone`);$('pb').outerHTML=`<a href="tel:${esc(r.phone)}"><button>📞 ${esc(r.phone)}</button></a>`}catch(e){toast(e.message)}}
+async function report(id){try{await api(`/api/ads/${id}/report`,'POST',{});toast('🚩 Şikayət göndərildi')}catch(e){toast(e.message)}}
+loadMe();
+
+function mapView(a){const la=Number(a.lat),lo=Number(a.lng);if(!a.lat||!a.lng||!isFinite(la)||!isFinite(lo))return'';
+ return `<h4 style="margin:14px 0 6px">📍 Konum</h4><iframe loading="lazy" style="width:100%;height:260px;border:0;border-radius:12px" src="https://www.openstreetmap.org/export/embed.html?bbox=${lo-.006}%2C${la-.004}%2C${lo+.006}%2C${la+.004}&layer=mapnik&marker=${la}%2C${lo}"></iframe><p><a href="https://www.google.com/maps?q=${la},${lo}" target="_blank" rel="noopener">Google Maps-də aç</a> · <a href="https://www.openstreetmap.org/?mlat=${la}&mlon=${lo}#map=17/${la}/${lo}" target="_blank" rel="noopener">OpenStreetMap</a></p>`}
+function loadLeaflet(){return new Promise((ok,no)=>{if(window.L)return ok();const l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.appendChild(l);const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+async function mapPick(){
+ $('dyn').insertAdjacentHTML('beforeend',`<div style="margin:8px 0"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap"><b>📍 Konum</b><button type="button" id="gps" style="padding:6px 12px">Mənim yerim</button><small class="mt" id="lt">Xəritədə kliklə yerini seçin (istəyə bağlı)</small></div><div id="pm" style="height:260px;border-radius:12px;isolation:isolate"></div><input type="hidden" data-a="lat" id="lat"><input type="hidden" data-a="lng" id="lng"></div>`);
+ try{await loadLeaflet()}catch{if($('pm'))$('pm').outerHTML='<p class="mt">Xəritə yüklənmədi (internet bağlantısını yoxlayın).</p>';return}
+ if(!$('pm'))return;
+ const m=L.map('pm').setView([40.4093,49.8671],11);
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(m);
+ let mk=null;const set=(la,lo)=>{if(mk)mk.setLatLng([la,lo]);else mk=L.circleMarker([la,lo],{radius:11,color:'#e11d48',fillColor:'#e11d48',fillOpacity:.8}).addTo(m);$('lat').value=la.toFixed(6);$('lng').value=lo.toFixed(6);$('lt').textContent='✅ Konum seçildi'};
+ m.on('click',e=>set(e.latlng.lat,e.latlng.lng));
+ $('gps').onclick=()=>navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>{m.setView([p.coords.latitude,p.coords.longitude],16);set(p.coords.latitude,p.coords.longitude)},()=>toast('Konuma icazə verilmədi')):toast('Brauzer dəstəkləmir');
+ setTimeout(()=>m.invalidateSize(),500)}
+
+function modelDyn(){const b=document.querySelector('[data-a=brand]');b.onchange=()=>mdl(b.value)}
+function mdl(br){const old=document.querySelector('[data-a=model]'),ms=CARS[br]||[],el=document.createElement(ms.length?'select':'input');el.dataset.a='model';
+ if(ms.length){el.innerHTML='<option value="">Model</option>'+ms.map(m=>`<option>${esc(m)}</option>`).join('')+'<option value="__d">Digər (özüm yazım)</option>';
+  el.onchange=()=>{if(el.value=='__d'){const i=document.createElement('input');i.dataset.a='model';i.placeholder='Modeli yazın';el.replaceWith(i);i.focus()}}}else el.placeholder='Model (yazın)';
+ old.replaceWith(el)}
+function fm(){const b=$('f_brand');if(!b)return;b.insertAdjacentHTML('afterend','<label>Model</label><select id="f_model"><option value="">Hamısı</option></select>');
+ b.onchange=()=>{$('f_model').innerHTML='<option value="">Hamısı</option>'+(CARS[b.value]||[]).map(m=>`<option>${esc(m)}</option>`).join('')}}
+</script></body></html>

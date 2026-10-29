@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="az"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin — Elan.az</title>
+<style>body{font-family:system-ui,sans-serif;margin:0;background:#f3f4f6}header{background:#111827;color:#fff;padding:14px 20px;display:flex;justify-content:space-between}
+main{max-width:1100px;margin:20px auto;padding:0 14px}.c{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.st div{background:#fff;border-radius:12px;padding:16px;font-size:13px;color:#6b7280}.st b{display:block;font-size:28px;color:#e11d48}
+button{border:0;border-radius:8px;padding:7px 12px;cursor:pointer;color:#fff;background:#e11d48;margin:2px}button.g{background:#6b7280}input{padding:9px;border:1px solid #ddd;border-radius:8px;width:100%;margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:7px;border-bottom:1px solid #eee;text-align:left;vertical-align:top}.rp{color:#e11d48;font-weight:700}</style></head><body>
+<header><b>Elan.az — Admin</b><a href="/" style="color:#fff">Sayta qayıt</a></header><main id="app"></main>
+<script>
+const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function api(u,m='GET',b){const r=await fetch(u,{method:m,headers:b?{'Content-Type':'application/json'}:{},body:b?JSON.stringify(b):undefined});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Xəta');return j}
+async function init(){const me=(await api('/api/me')).user;if(!me?.is_admin)return loginView(me);panel()}
+function loginView(me){$('app').innerHTML=`<div class="c" style="max-width:360px;margin:60px auto"><h3>Admin girişi</h3>${me?'<p style="color:#e11d48">Bu hesabın admin icazəsi yoxdur.</p>':''}<input id="e" placeholder="E-poçt"><input id="p" type="password" placeholder="Parol"><button onclick="lg()">Daxil ol</button></div>`}
+async function lg(){try{await api('/api/login','POST',{email:$('e').value,password:$('p').value});init()}catch(e){alert(e.message)}}
+async function panel(){const [s,ads,us]=await Promise.all([api('/api/admin/stats'),api('/api/admin/ads'),api('/api/admin/users')]);
+$('app').innerHTML=`<div class="st"><div><b>${s.users}</b>İstifadəçi</div><div><b>${s.ads}</b>Aktiv elan</div><div><b>${s.hidden}</b>Gizlədilmiş</div><div><b>${s.reported}</b>Şikayətli</div></div><br>
+<div class="c"><h3>Elanlar (şikayətlilər yuxarıda)</h3><div style="overflow:auto"><table><tr><th>ID</th><th>Başlıq</th><th>Sahib</th><th>Telefon</th><th>Şikayət</th><th>Status</th><th></th></tr>
+${ads.map(a=>`<tr><td>${a.id}</td><td>${esc(a.title)}<br><small>${esc(a.city)} • ${esc(a.price??'')} ₼</small></td><td>${esc(a.email||'-')}</td><td>${esc(a.phone)}</td><td class="${a.reports?'rp':''}">${a.reports}</td><td>${esc(a.status)}</td>
+<td><button class="g" onclick="act(()=>api('/api/admin/ads/${a.id}/status','POST',{status:'${a.status=='active'?'hidden':'active'}'}))">${a.status=='active'?'Gizlət':'Aktiv et'}</button><button onclick="if(confirm('Silinsin?'))act(()=>api('/api/ads/${a.id}','DELETE'))">Sil</button></td></tr>`).join('')}</table></div></div>
+<div class="c"><h3>İstifadəçilər</h3><div style="overflow:auto"><table><tr><th>ID</th><th>Ad</th><th>E-poçt</th><th>Telefon</th><th>Elan</th><th></th></tr>
+${us.map(u=>`<tr><td>${u.id}</td><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${esc(u.phone)}</td><td>${u.ads}</td><td>${u.is_admin?'Admin':`<button class="${u.banned?'g':''}" onclick="act(()=>api('/api/admin/users/${u.id}/ban','POST',{banned:${!u.banned}}))">${u.banned?'Blokdan çıxar':'Blokla'}</button>`}</td></tr>`).join('')}</table></div></div>`}
+async function act(f){try{await f();panel()}catch(e){alert(e.message)}}
+init();
+</script></body></html>
